@@ -23,3 +23,6 @@ class Vin(models.Model):
     name = models.CharField(blank=True, max_length=255, help_text=_("Le nom du vin"))
     wine_color = models.CharField(choices=WINE_COLOR_CHOICES, max_length=255, help_text=_("La couleur du vin"))
     year = models.PositiveSmallIntegerField(blank=True, null=True, help_text=_("Le millésime du vin"))
+    
+    def __unicode__(self):
+        return self.appellation+" "+str(self.year)
