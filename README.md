@@ -70,8 +70,8 @@ urlpatterns = [
 ```
 
 On a donc l'exemple de deux stratégies différentes:
-* Le routage direct (mauvaise pratique), qui consiste à rediriger directement la requète du niveau projet à la vue (vue "youhou")
-* Le routage indirect, par un niveau de routage intermédiaire via l'application "core" (vues "index" et "liste")
+* Le routage direct (mauvaise pratique), qui consiste à rediriger directement la requète du niveau projet à la vue (vue "youhou" http://127.0.0.1:8000/youhou/ )
+* Le routage indirect, par un niveau de routage intermédiaire via l'application "core" (vues "index" http://127.0.0.1:8000/vins et "liste" http://127.0.0.1:8000/vins/liste)
 
 ### Jouer avec le contrôleur (atelier du 7/07)
 Si l'on rajoute la ligne suivante dans core/views.py:
