@@ -25,3 +25,14 @@ class Vin(models.Model):
     
     def __unicode__(self):
         return self.appellation+" "+str(self.year)
+        
+class Bouteille(models.Model):
+    prix = models.DecimalField(_("prix"), max_digits=6, decimal_places=2, blank=True,
+        help_text=_("Prix unitaire"))
+    contenance = models.DecimalField(_("contenance"), max_digits=4, decimal_places=1, blank=True,
+        help_text=_("contenance"))
+    provenance = models.CharField(_("provenance"), max_length=255, blank=True,
+        help_text=_("provenance de la bouteille"))
+    #etiquette = models.ImageField()
+    vin = models.ForeignKey("Vin")
+    

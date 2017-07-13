@@ -11,7 +11,12 @@ def youhou(request):
     return HttpResponse("Youhou !!")
 
 def index(request):
-    return HttpResponse("Index : {} vin(s)".format(Vin.objects.count()))
+    
+    v=Vin.objects.all()[0]
+    v.year = v.year+1
+    v.save()
+    return HttpResponse("Premier vin : {}".format(v))
+    #return HttpResponse("Index : {} vin(s)".format(Vin.objects.count()))
 
 def liste(request):
     return HttpResponse("Liste : "+", ".join([unicode(v) for v in Vin.objects.all()]))
