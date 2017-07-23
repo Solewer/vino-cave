@@ -1,0 +1,10 @@
+{% if liste_vins %}
+    <ul>
+    {% for vin in liste_vins %}
+        <!-- <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li> -->
+        <li>{{ vin }} ({{ vin.bouteille_set.count }})</li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>Pas de vin dans la base de données.</p>
+{% endif %}
