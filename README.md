@@ -82,3 +82,46 @@ On peut maintenant jouer avec les objets en base de données par l'utilisation d
 ```
 Vin.objects.count() #retourne le nombre de bouteilles en bdd
 ```
+
+### Modifier le modèle de données (atelier du 13/07)
+On rajoute la définition de la classe Bouteille dans core/models.py:
+
+```
+class Bouteille(models.Model):
+    prix = models.DecimalField(_("prix"), max_digits=6, decimal_places=2, blank=True,
+        help_text=_("Prix unitaire"))
+    contenance = models.DecimalField(_("contenance"), max_digits=4, decimal_places=1, blank=True,
+        help_text=_("contenance"))
+    provenance = models.CharField(_("provenance"), max_length=255, blank=True,
+        help_text=_("provenance de la bouteille"))
+    #etiquette = models.ImageField()
+    vin = models.ForeignKey("Vin")
+```
+
+Pour pouvoir jouer avec il faut en plus :
+- Créer la migration correspondante
+- Compléter le comportement attendu de l'admin
+
+### Créer la migration
+Ça se fait très facilement, en tapant dans la console (toujours avec l'environnement virtuel, bien sûr !)
+
+```
+(env)$ python manage.py makemigrations
+(env)$ python manage.py migrate
+```
+Et voilà, la base de données est à jour des modifications apportées à models.py!
+
+### Compléter le comportement attendu de l'admin
+Pour annoncer que l'on veut pouvoir jouer avec les bouteilles dans l'admin, il faut le préciser dans core/admin.py. On importe la classe Bouteille depuis models.py et on invoque la fonction register sur cette nouvelle classe:
+```
+from .models import Vin, Bouteille
+
+admin.site.register(Vin)
+admin.site.register(Bouteille)
+```
+
+On relance le serveur de test avec
+```
+(env)$ python manage.py runserver
+```
+Et à l'adresse http://localhost:8000/admin/core/ on peut maintenant ajouter supprimer et modifier des bouteilles !
